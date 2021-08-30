@@ -1,13 +1,28 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles(theme => ({
+  app: {
+    height: '50vh',
+  },
+  header: {
+    textAlign: 'center',
+    width: '100%',
+    backgroundColor: '#282c34',
+  },
+  editor: {
+    height: '50vh',
+  },
+}));
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className={classes.app}>
+      <header className={classes.header}>
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
@@ -16,7 +31,7 @@ function App() {
           </button>
         </p>
         <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
+          Edit <code>App.tsx</code> and save to test HMR updates/.
         </p>
         <p>
           <a
@@ -38,6 +53,9 @@ function App() {
           </a>
         </p>
       </header>
+      <div id="monaco-editor-embed" className={classes.editor}>
+
+      </div>
     </div>
   )
 }
