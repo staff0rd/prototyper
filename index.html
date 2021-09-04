@@ -37,11 +37,11 @@
         _tsWorker,
         sandboxFactory
       ) => {
-        const initialCode = `import { range } from 'lodash';
-
-export default async function () {
-    range(1,5).forEach(p => console.log('hi Evren ' + p));
+        const initialCode = `function myFunction() {
+    console.log('does this work')
 }
+
+myFunction();
 
 `
 
