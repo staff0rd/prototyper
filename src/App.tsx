@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { makeStyles } from "@material-ui/core";
 import { format } from "prettier/standalone";
+import * as parserTypescript from "prettier/parser-typescript";
 import loadSandbox, { TypescriptSandbox } from "./typescriptSandbox";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,9 +39,15 @@ function App() {
           <button
             type="button"
             onClick={async () => {
-              // TODO: format with prettier here
-
-              sandbox && eval(await sandbox.getRunnableJS());
+              if (sandbox) {
+                const source = sandbox.getText();
+                const formatted = format(source, {
+                  parser: "typescript",
+                  plugins: [parserTypescript],
+                });
+                sandbox.setText(formatted);
+                eval(await sandbox.getRunnableJS());
+              }
             }}
           >
             Run
