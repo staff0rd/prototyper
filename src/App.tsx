@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { makeStyles } from "@material-ui/core";
 import { format } from "prettier/standalone";
+import loadSandbox, { TypescriptSandbox } from "./typescriptSandbox";
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -20,6 +21,14 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const [sandbox, setSandbox] = useState<TypescriptSandbox>();
+  useEffect(() => {
+    const load = async () => {
+      const result = await loadSandbox();
+      setSandbox(result);
+    };
+    load();
+  }, []);
   return (
     <div className={classes.app}>
       <header className={classes.header}>
@@ -29,8 +38,9 @@ function App() {
           <button
             type="button"
             onClick={async () => {
-              // format with prettier here
-              eval(await (window as any).sandbox.getRunnableJS());
+              // TODO: format with prettier here
+
+              sandbox && eval(await sandbox.getRunnableJS());
             }}
           >
             Run
