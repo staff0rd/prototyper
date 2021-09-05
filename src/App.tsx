@@ -60,6 +60,16 @@ const resizePixi = (pixi: Application, isVerticallyStacked: boolean) => {
   pixi.renderer.resize(size.width, size.height);
 };
 
+const initialCode = `
+import * as PIXI from 'pixi.js';
+function myFunction() {
+  console.log('does this work')
+  }
+  
+  myFunction();
+  
+  `;
+
 function App() {
   const classes = useStyles();
   const [sandbox, setSandbox] = useState<TypescriptSandbox>();
@@ -74,7 +84,7 @@ function App() {
 
   useEffect(() => {
     const load = async () => {
-      const result = await loadSandbox();
+      const result = await loadSandbox(initialCode);
       setSandbox(result);
     };
     load();

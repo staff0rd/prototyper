@@ -7,4 +7,6 @@ declare type TypescriptSandbox = {
   setText: (text: string) => void;
 };
 
-export default function loadSandbox(): Promise<TypescriptSandbox>;
+export default function loadSandbox(
+  initialCode: string
+): Promise<TypescriptSandbox>;

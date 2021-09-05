@@ -1,4 +1,4 @@
-const loadSandbox = () => {
+const loadSandbox = (initialCode) => {
   return new Promise((resolve, reject) => {
     // First set up the VSCode loader in a script tag
     const getLoaderScript = document.createElement("script");
@@ -28,14 +28,6 @@ const loadSandbox = () => {
         "vs/language/typescript/tsWorker",
         "sandbox/index",
       ], (main, _tsWorker, sandboxFactory) => {
-        const initialCode = `function myFunction() {
-console.log('does this work')
-}
-
-myFunction();
-
-`;
-
         const isOK = main && window.ts && sandboxFactory;
         if (isOK) {
           console.log("Typescript sandbox loaded successfully");
