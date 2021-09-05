@@ -38,9 +38,7 @@ myFunction();
 
         const isOK = main && window.ts && sandboxFactory;
         if (isOK) {
-          document
-            .getElementById("loader")
-            .parentNode.removeChild(document.getElementById("loader"));
+          console.log("Typescript sandbox loaded successfully");
         } else {
           console.error(
             "Could not get all the dependencies of sandbox set up!"

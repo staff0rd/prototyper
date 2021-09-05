@@ -33,11 +33,12 @@ const useStyles = makeStyles((theme) => ({
   editorContainer: {
     display: "flex",
     flex: 1,
+    flexDirection: "column",
     [theme.breakpoints.down("md")]: {},
     backgroundColor: "pink",
   },
   editor: {
-    //height: "50vh",
+    height: "100%",
   },
   toolbar: {},
   pixi: {
@@ -71,13 +72,13 @@ function App() {
     pixi && resizePixi(pixi, isMd);
   }, [isMd]);
 
-  // useEffect(() => {
-  //   const load = async () => {
-  //     const result = await loadSandbox();
-  //     setSandbox(result);
-  //   };
-  //   load();
-  // }, []);
+  useEffect(() => {
+    const load = async () => {
+      const result = await loadSandbox();
+      setSandbox(result);
+    };
+    load();
+  }, []);
 
   useEffect(() => {
     const pixi = new Application({
@@ -111,13 +112,12 @@ function App() {
     <div className={classes.container}>
       <div className={classes.app}>
         <div className={classes.editorContainer}>
-          One
-          {/* <div className={classes.toolbar}>
+          <div className={classes.toolbar}>
             <button type="button" onClick={formatAndRun}>
               Run
             </button>
           </div>
-          <div id="monaco-editor-embed" className={classes.editor}></div> */}
+          <div id="monaco-editor-embed" className={classes.editor}></div>
         </div>
         <div className={classes.pixi} ref={pixiElement} />
       </div>
